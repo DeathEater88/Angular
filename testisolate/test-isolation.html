@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test isolation</title>
+</head>
+<body ng-app="app">
+<div ng-controller="myController">
+	
+	Controll name: <input type="text" ng-model="name">
+				   <p>Your name is: {{name}}</p>
+	<p ng-test model-directive="name" message="message(name)"></p>
+
+</div>
+
+<!-- js  -->
+<script src="js/angular.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8" async defer>
+(function(){
+	var app=angular.module("app",[]);
+	app.controller('myController', myController);
+
+	function myController($scope){
+		$scope.name="Son";
+		$scope.message=function(name){
+			alert(name);
+		};
+	}
+
+	app.directive('ngTest',myDirectiveFunction);
+
+	function myDirectiveFunction(){
+		var directive={};
+		directive.scope={
+			mdirective:'=modelDirective',
+			message:'&'
+		};
+		directive.restrict="EA";
+		directive.template='Directive: <input type="text" ng-model="mdirective"><p>Your name is: {{mdirective}}</p> <button ng-click="message({name:mdirective})">Message</button>';
+
+		return directive;
+	}
+})();	
+
+</script>
+
+</body>
+</html>

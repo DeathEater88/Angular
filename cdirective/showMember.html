@@ -1,0 +1,22 @@
+
+	<table align="center">
+		<thead>
+			<tr>
+				<th><input type="checkbox" ng-model="selectAll" ng-click="checkAll()"></th>
+				<th>ID</th>
+				<th>Fist Name</th>
+				<th>Last Name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="member in members | filter:searchText">
+				<td><input type="checkbox" ng-model="member.active" ng-click="chooseMember(member)"></td>
+				<td>{{member.id}}</td>
+				<td>{{member.lastName}}</td>
+				<td>{{member.firstName}}</td>
+			</tr>
+			<tr>
+				<td colspan="4">Member đang chọn: {{selectedMembers}}</td>
+			</tr>
+		</tbody>
+	</table>
